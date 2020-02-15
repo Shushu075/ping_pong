@@ -4,9 +4,9 @@ import requests
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
-    r = requests.get('http://127.0.0.1:2000/serveur')
+    r = requests.post('http://127.0.0.1:2000/serveur', data="http://127.0.0.1:5000")
     receive = r.text
 
     if receive is not None:

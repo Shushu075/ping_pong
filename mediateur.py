@@ -1,20 +1,25 @@
 from flask import Flask
 import requests
+from flask import request
 
 app = Flask(__name__)
 
-
-# serveur 1 retourne une reponse
-# serveur 2 retourne une reponse
-
-@app.route('/serveur')
-def sendOne():
-    return 'http://127.0.0.1:8000'
+adressOne = None
+adressTwo = None
 
 
-@app.route('/client')
-def sendTwo():
-    return 'http://127.0.0.1:5000'
+@app.route('/serveur', methods=['GET', 'POST'])
+def receiveOne():
+    global adressOne
+    adressOne = request.data.decode('utf-8')
+    return adressTwo
+
+
+@app.route('/client', methods=['GET', 'POST'])
+def receiveTwo():
+    global adressTwo
+    adressTwo = request.data.decode('utf-8')
+    return adressOne
 
 
 if __name__ == '__main__':

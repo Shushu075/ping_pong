@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    r = requests.get('http://127.0.0.1:2000/client')
+    r = requests.get('http://127.0.0.1:2000/client', data="http://127.0.0.1:8000")
     receive = r.text
 
     if receive is not None:
